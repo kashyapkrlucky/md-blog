@@ -18,7 +18,7 @@ export default function HomePage() {
     fetchPosts();
   }, []);
   return (
-    <div className="max-w-7xl mx-auto py-8">
+    <div className="max-w-7xl mx-auto p-6">
       <div className="flex flex-row gap-4 justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">All Blogs</h1>
         <Link

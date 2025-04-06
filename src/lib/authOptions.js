@@ -14,6 +14,8 @@ export const authOptions = {
       async authorize(credentials) {
         await connectDB();
         const user = await User.findOne({ email: credentials.email });
+        console.log(user);
+
         if (!user) throw new Error("User not found");
 
         const isValid = await bcrypt.compare(
@@ -33,4 +35,20 @@ export const authOptions = {
     signIn: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }) {
+      // First time `user` is available
+      if (user) {
+        token._id = user.id;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (token?._id) {
+        session.user._id = token._id;
+      }
+      return session;
+    },
+  },
 };

@@ -34,7 +34,7 @@ export default function EditPost({ params }) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-6">
+    <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Edit Blog</h1>
       {error && <p className="text-red-600">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">

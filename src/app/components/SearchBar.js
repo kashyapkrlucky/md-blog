@@ -32,7 +32,7 @@ export default function SearchBar({ setPosts }) {
   }, [debouncedQuery, tag, setPosts]);
 
   return (
-    <div className="my-4 py-4">
+    <>
       <div className="flex flex-row gap-4">
         <input
           type="text"
@@ -54,7 +54,7 @@ export default function SearchBar({ setPosts }) {
       </div>
 
       {query && (
-        <div className="mt-4">
+        <div className="mb-4">
           {loading ? (
             <p>Loading...</p>
           ) : (
@@ -62,6 +62,6 @@ export default function SearchBar({ setPosts }) {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

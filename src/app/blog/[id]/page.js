@@ -1,16 +1,12 @@
 import { connectDB } from "@md-blog/lib/db";
 import Post from "@md-blog/models/Post";
-import User from "@md-blog/models/User";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@md-blog/lib/authOptions";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 // import { SummaryButton } from "@md-blog/app/components/SummaryButton";
-import {
-  PencilIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import CommentSection from "@md-blog/app/components/CommentSection";
 
 export default async function BlogPost({ params }) {
   const session = await getServerSession(authOptions);
@@ -25,7 +21,7 @@ export default async function BlogPost({ params }) {
   const isOwner = session?.user?.email === post.author.email;
 
   return (
-    <article className="max-w-7xl mx-auto py-6 mt-16 space-y-8">
+    <article className="max-w-7xl mx-auto p-6 space-y-8">
       <header className="flex flex-row gap-4 items-center">
         <h1 className="text-3xl font-bold">{post.title}</h1>
         {isOwner && (
@@ -51,6 +47,8 @@ export default async function BlogPost({ params }) {
       <p className="text-sm text-gray-500">by {post.author.name}</p>
       <ReactMarkdown>{post.content}</ReactMarkdown>
       {/* <SummaryButton postId={post._id.toString()} /> */}
+      {/* ... Post content */}
+      <CommentSection postId={post._id} />
     </article>
   );
 }
