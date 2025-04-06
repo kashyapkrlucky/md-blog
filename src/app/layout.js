@@ -1,10 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import NavHeader from "@md-blog/app/components/NavHeader";
 import "./globals.css";
 import ClientWrapper from "@md-blog/app/components/ClientWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geistSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       >
         <ClientWrapper>
           <NavHeader />
-          <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
+          <main>{children}</main>
         </ClientWrapper>
       </body>
     </html>

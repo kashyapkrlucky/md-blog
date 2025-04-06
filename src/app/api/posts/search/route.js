@@ -15,9 +15,14 @@ export async function GET(req) {
   }
 
   const posts = await Post.find({
-    ...filter,
-    $text: { $search: query }, // Text search on title and content
-  }).sort({ createdAt: -1 });
+    $or: [
+      { title: { $regex: query, $options: "i" } },
+      { content: { $regex: query, $options: "i" } },
+      { tags: { $regex: tag, $options: "i" } },
+    ],
+  })
+    .populate("author", { name: 1 })
+    .sort({ createdAt: -1 });
 
   return Response.json({ posts });
 }

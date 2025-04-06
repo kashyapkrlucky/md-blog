@@ -14,7 +14,9 @@ export async function GET(req) {
     filter = { tags: tag }; // Filter by tags
   }
 
-  const posts = await Post.find({}).sort({ createdAt: -1 });
+  const posts = await Post.find({})
+    .populate("author", { name: 1 })
+    .sort({ createdAt: -1 });
 
   return Response.json({ posts });
 }

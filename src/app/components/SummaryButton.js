@@ -34,7 +34,7 @@ export function SummaryButton({ postId }) {
   };
 
   return (
-    <div className="mt-6">
+    <div>
       <button
         onClick={getSummary}
         disabled={loading}
