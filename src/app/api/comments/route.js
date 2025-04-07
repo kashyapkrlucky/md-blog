@@ -10,7 +10,6 @@ export async function POST(req) {
 
   await connectDB();
   const { postId, content } = await req.json();
-  console.log(session.user);
 
   const comment = await Comment.create({
     postId,
