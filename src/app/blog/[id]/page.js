@@ -5,8 +5,9 @@ import { authOptions } from "@md-blog/lib/authOptions";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 // import { SummaryButton } from "@md-blog/app/components/SummaryButton";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import CommentSection from "@md-blog/app/components/CommentSection";
+import DeleteButton from "@md-blog/app/components/DeleteButton";
 
 export default async function BlogPost({ params }) {
   const session = await getServerSession(authOptions);
@@ -21,9 +22,15 @@ export default async function BlogPost({ params }) {
   const isOwner = session?.user?.email === post.author.email;
 
   return (
-    <article className="max-w-7xl mx-auto p-6 space-y-8">
+    <article className="max-w-7xl mx-auto p-6 lg:px-0 space-y-8">
       <header className="flex flex-row gap-4 items-center">
-        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <Link
+          href="/"
+          className="inline-flex items-center text-sm text-gray-600 hover:text-black"
+        >
+          <ChevronLeftIcon className="w-8 h-8" />
+        </Link>
+        <h1 className="text-3xl font-bold">{post.title}</h1>{" "}
         {isOwner && (
           <div className="flex flex-row">
             <Link
@@ -32,15 +39,7 @@ export default async function BlogPost({ params }) {
             >
               <PencilSquareIcon className="w-5 h-5" />
             </Link>
-            <form action={`/api/posts/${post._id}`} method="POST">
-              <input type="hidden" name="_method" value="DELETE" />
-              <button
-                type="submit"
-                className="text-red-600 text-xs px-3 py-1 uppercase rounded-md cursor-pointer"
-              >
-                <TrashIcon className="w-5 h-5" />
-              </button>
-            </form>
+            <DeleteButton apiPath="/api/posts" id={post?._id} />
           </div>
         )}
       </header>
@@ -48,7 +47,7 @@ export default async function BlogPost({ params }) {
       <ReactMarkdown>{post.content}</ReactMarkdown>
       {/* <SummaryButton postId={post._id.toString()} /> */}
       {/* ... Post content */}
-      <CommentSection postId={post._id} />
+      <CommentSection postId={post._id.toString()} />
     </article>
   );
 }

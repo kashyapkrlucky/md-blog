@@ -38,8 +38,8 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full h-[54rem] flex items-center justify-center bg-gray-50">
-      <div className="lg:w-1/3 w-full px-10 bg-white rounded-md shadow-xl border border-gray-200">
+    <div className="w-full h-[48rem] lg:h-[54rem] flex items-center justify-center bg-gray-50 p-6">
+      <div className="lg:w-1/3 w-full px-6 lg:px-10 bg-white rounded-md shadow-xl border border-gray-200">
         <section className="flex-1 flex flex-col gap-1 py-10">
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl font-bold">Sign In</h2>
