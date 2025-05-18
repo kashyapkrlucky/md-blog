@@ -1,4 +1,4 @@
-## **Blogging Platform Documentation**
+## **Blogging Platform Markdown**
 
 ### **Overview**
 
